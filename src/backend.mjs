@@ -67,7 +67,11 @@ export async function getOffre(id) {
 
 export async function bySurface(lasurface) {
   try{
-  const records = await pb.collection("Maison").getFullList({ filter : "surface>"+lasurface}) ;
+  let records = await pb.collection("Maison").getFullList({ filter : "surface>"+lasurface}) ;
+  records = records.map((a) => {
+    a.img = pb.files.getURL(a, a.image);
+    return a;
+  });
   return records ;
   } catch(error){
   console.log("Une erreur est survenue en lisant la liste des maisons",error);
