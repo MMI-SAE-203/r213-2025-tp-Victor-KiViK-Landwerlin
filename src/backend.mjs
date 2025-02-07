@@ -78,3 +78,17 @@ export async function bySurface(lasurface) {
   return [];
   }
 }
+
+export async function byprix(leprix) {
+  try{
+  let records = await pb.collection("Maison").getFullList({ filter : "prix<"+leprix}) ;
+  records = records.map((a) => {
+    a.img = pb.files.getURL(a, a.image);
+    return a;
+  });
+  return records ;
+  } catch(error){
+  console.log("Une erreur est survenue en lisant la liste des maisons",error);
+  return [];
+  }
+}
