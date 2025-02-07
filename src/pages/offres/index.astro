@@ -1,7 +1,7 @@
 ---
-import Base from '../layouts/Base.astro';
-import Card from '../components/Card.astro';
-import { getOffres } from "../backend.mjs";
+import Base from '../../layouts/Base.astro';
+import Card from '../../components/Card.astro';
+import { getOffres } from "../../backend.mjs";
 
 const offres = await getOffres();
 console.log(offres);
@@ -12,6 +12,7 @@ console.log(offres);
     <div x-data="{ showFavorites: false, viewMode: 'grid' }">
     <button
       @click="showFavorites = !showFavorites"
+      class="font-bold py-2 px-4 rounded-lg border-2 border-green-800"
       
     >
       <span x-show="!showFavorites">Afficher les favoris</span>
@@ -21,15 +22,15 @@ console.log(offres);
     <div class="flex space-x-4 my-5">
       <button
         @click="viewMode = 'grid'"
-        :class="viewMode === 'grid' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
-        class="font-bold py-2 px-4 rounded-lg border-2 border-blue-800"
+        :class="viewMode === 'grid' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
+        class="font-bold py-2 px-4 rounded-lg border-2 border-green-800"
       >
         Vue Grille
       </button>
       <button
         @click="viewMode = 'list'"
-        :class="viewMode === 'list' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-black'"
-        class="font-bold py-2 px-4 rounded-lg border-2 border-blue-800"
+        :class="viewMode === 'list' ? 'bg-green-500 text-white' : 'bg-gray-200 text-black'"
+        class="font-bold py-2 px-4 rounded-lg border-2 border-green-800"
       >
         Vue Liste
       </button>
@@ -37,7 +38,7 @@ console.log(offres);
 
     <div 
       x-show="!showFavorites" 
-      :class="viewMode === 'grid' ? 'grid grid-cols-1 lg:grid-cols-3 gap-4' : 'flex flex-col space-y-4'"
+      x-bind:class="viewMode === 'grid' ? 'grid grid-cols-1 lg:grid-cols-3 gap-4' : 'flex flex-col space-y-4'"
     >
       {offres.map((offre) => <Card {...offre} />)}
     </div>
