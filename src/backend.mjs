@@ -23,13 +23,6 @@ export async function allMaisonsSorted() {
   return records;
 }
 
-export async function bySurface(lasurface) {
-  const records = await pb
-    .collection("Maison")
-    .getList(1, 50, { filter: "surface>" + lasurface });
-  return records;
-}
-
 export async function surfaceORprix(s, p) {
   const records = await pb
     .collection("Maison")
@@ -69,5 +62,15 @@ export async function getOffre(id) {
   } catch (error) {
       console.log('Une erreur est survenue en lisant la maison', error);
       return null;
+  }
+}
+
+export async function bySurface(lasurface) {
+  try{
+  const records = await pb.collection("Maison").getFullList({ filter : "surface>"+lasurface}) ;
+  return records ;
+  } catch(error){
+  console.log("Une erreur est survenue en lisant la liste des maisons",error);
+  return [];
   }
 }
