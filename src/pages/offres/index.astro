@@ -35,6 +35,7 @@ if (Astro.request.method === "POST") {
       <input type="number" name="maxPrix" placeholder="Prix maximum" />
       <input type="submit" value="Filtrer par prix" />
   </form>
+  <p>{message}</p>
     <div x-data="{ showFavorites: false, viewMode: 'grid' }">
     <button
       @click="showFavorites = !showFavorites"
