@@ -9,8 +9,6 @@ const offres = await bySurface(surface);
 if(!offres){
    return Astro.redirect('/offres');
 }
-
-const {...offre} = Astro.props;
 ---
 
 <Base>
